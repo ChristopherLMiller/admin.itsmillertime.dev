@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "galleries",
+  "info": {
+    "name": "Gallery"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "featured_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "visibility": {
+      "type": "enumeration",
+      "enum": [
+        "PUBLIC",
+        "PRIVATE",
+        "PROTECTED"
+      ],
+      "default": "PUBLIC",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "PUBLISHED",
+        "DRAFT",
+        "UNPUBLISHED"
+      ],
+      "default": "PUBLISHED",
+      "required": true
+    },
+    "gallery_categories": {
+      "collection": "gallery-categories"
+    },
+    "gallery_tags": {
+      "collection": "gallery-tags"
+    },
+    "roles": {
+      "plugin": "users-permissions",
+      "collection": "role"
+    }
+  }
+}
