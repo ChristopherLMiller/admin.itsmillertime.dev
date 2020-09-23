@@ -28,26 +28,6 @@
       "plugin": "upload",
       "required": false
     },
-    "visibility": {
-      "type": "enumeration",
-      "enum": [
-        "PUBLIC",
-        "PRIVATE",
-        "PROTECTED"
-      ],
-      "default": "PUBLIC",
-      "required": true
-    },
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "PUBLISHED",
-        "DRAFT",
-        "UNPUBLISHED"
-      ],
-      "default": "PUBLISHED",
-      "required": true
-    },
     "gallery_categories": {
       "collection": "gallery-categories"
     },
@@ -57,6 +37,23 @@
     "roles": {
       "plugin": "users-permissions",
       "collection": "role"
+    },
+    "gallery_images": {
+      "collection": "gallery-image",
+      "via": "galleries",
+      "dominant": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "PUBLIC",
+        "PROTECTED",
+        "DRAFT",
+        "ARCHIVED",
+        "PRIVATE"
+      ],
+      "default": "PUBLIC",
+      "required": true
     }
   }
 }

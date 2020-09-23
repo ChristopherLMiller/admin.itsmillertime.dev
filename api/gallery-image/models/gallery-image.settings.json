@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gallery_images",
+  "info": {
+    "name": "Gallery Image"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "caption": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "caption"
+    },
+    "watermarked": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "clean": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "galleries": {
+      "via": "gallery_images",
+      "collection": "gallery"
+    }
+  }
+}
