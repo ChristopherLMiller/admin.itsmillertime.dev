@@ -9,88 +9,54 @@ const { sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
   async find(ctx) {
-    // object to store query parameters
-    let queryParams;
-
-    // Apply correct parameters based on user auth state
-    if (ctx.state.user) {
-      // user is authenticated so lets just pass the query as is for now
-      queryParams = {
-        ...ctx.query,
-      };
-    } else {
-      // user is not authenticated, only return published, public data
-      queryParams = {
-        ...ctx.query,
-        status: "PUBLISHED",
-        visibility: "PUBLIC",
-      };
-    }
-
     let entities;
-    if (queryParams._q) {
-      entities = await strapi.services.gallery.search(queryParams);
+    if (ctx.query._q) {
+      entities = await strapi.services.gallery.search(ctx.query._q);
     } else {
-      entities = await strapi.services.gallery.find(queryParams);
+      entities = await strapi.services.gallery.find(ctx.query);
     }
 
-    let finalEntitiesList = [];
+    let filteredEntities = [];
 
-    if (ctx.state.user) {
-      // ok so now that we have all the entities we need to filter out results
-      entities.forEach((entity) => {
-        switch (entity.visibility) {
-          case "PRIVATE": {
-            if (ctx.state.user.role.type === "administrator") {
-              finalEntitiesList.push(entity);
-            }
-            break;
-          }
-          case "PROTECTED": {
-            switch (entity.status) {
-              case "PUBLISHED": {
-                // use a filter to see if the role is present on the entity
-                const results = entity.roles.filter(
-                  (entity) => entity.type === ctx.state.user.role.type
-                );
-                if (results) finalEntitiesList.push(entity);
-                break;
-              }
-              case "DRAFT":
-              case "UNPUBLISHED": {
-                if (ctx.state.user.role.type === "administrator") {
-                  finalEntitiesList.push(entity);
-                }
-                break;
-              }
-            }
-            break;
-          }
-          case "PUBLIC": {
-            switch (entity.status) {
-              case "PUBLISHED": {
-                finalEntitiesList.push(entity);
-                break;
-              }
-              case "DRAFT":
-              case "UNPUBLISHED": {
-                if (ctx.state.user.role.type === "administrator") {
-                  finalEntitiesList.push(entity);
-                }
-                break;
-              }
-            }
-            break;
-          }
+    // ok so now that we have all the entities we need to filter out results
+    entities.forEach((entity) => {
+      switch (entity.status) {
+        // Public entities can be viewed by all
+        case "PUBLIC": {
+          filteredEntities.push(entity);
+          break;
         }
-      });
-    } else {
-      finalEntitiesList = entities;
-    }
 
-    console.log(finalEntitiesList);
+        // Protected entities require user to be logged in to get their role to validate against
+        case "PROTECTED": {
+          if (ctx.state.user) {
+            const filteredResults = entity.roles.filter(
+              (entity) => entity.type === ctx.state.user.role.type
+            );
+            if (
+              filteredResults.length > 0 ||
+              ctx.state.user.role.type === "administrator"
+            )
+              filteredEntities.push(entity);
+          }
+          break;
+        }
 
-    return finalEntitiesList.map((entity) =>
+        // Draft, archived, and private can only be viewed by administrator at present
+        case "DRAFT":
+        case "ARCHIVED":
+        case "PRIVATE": {
+          if (ctx.state.user) {
+            if (ctx.state.user.role.type === "administrator") {
+              filteredEntities.push(entity);
+            }
+          }
+          break;
+        }
+      }
+    });
+
+    return filteredEntities.map((entity) =>
       sanitizeEntity(entity, { model: strapi.models.gallery })
     );
   },
