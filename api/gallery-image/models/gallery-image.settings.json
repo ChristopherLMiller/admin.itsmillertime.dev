@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "gallery_images",
   "info": {
-    "name": "Gallery Image"
+    "name": "Gallery Image",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "caption": {
@@ -35,8 +37,18 @@
       "required": false
     },
     "galleries": {
-      "via": "gallery_images",
-      "collection": "gallery"
+      "collection": "gallery",
+      "via": "gallery_images"
+    },
+    "share": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.share"
+    },
+    "sell": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.sell"
     }
   }
 }

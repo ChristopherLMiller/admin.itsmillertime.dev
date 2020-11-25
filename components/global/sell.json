@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_global_sells",
+  "info": {
+    "name": "Sell",
+    "icon": "money-bill"
+  },
+  "options": {},
+  "attributes": {
+    "price": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

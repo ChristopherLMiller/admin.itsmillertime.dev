@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gardens",
+  "info": {
+    "name": "Gardens"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "contents": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

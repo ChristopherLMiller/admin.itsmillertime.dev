@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "galleries",
   "info": {
-    "name": "Gallery"
+    "name": "Gallery",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -39,8 +41,8 @@
       "collection": "role"
     },
     "gallery_images": {
-      "collection": "gallery-image",
       "via": "galleries",
+      "collection": "gallery-image",
       "dominant": true
     },
     "status": {

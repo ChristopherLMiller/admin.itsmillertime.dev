@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_global_shares",
+  "info": {
+    "name": "Share",
+    "icon": "share-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "facebook": {
+      "type": "boolean"
+    },
+    "twitter": {
+      "type": "boolean"
+    },
+    "instagram": {
+      "type": "boolean"
+    }
+  }
+}

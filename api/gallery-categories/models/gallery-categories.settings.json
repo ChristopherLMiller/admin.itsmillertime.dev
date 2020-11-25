@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "gallery_categories",
   "info": {
-    "name": "Gallery Categories"
+    "name": "Gallery Categories",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -15,6 +17,18 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "image_large": {
+      "type": "string"
+    },
+    "image_full": {
+      "type": "string"
+    },
+    "image_large_watermarked": {
+      "type": "string"
+    },
+    "image_full_watermarked": {
+      "type": "string"
     }
   }
 }
