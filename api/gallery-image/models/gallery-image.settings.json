@@ -37,8 +37,8 @@
       "required": false
     },
     "galleries": {
-      "collection": "gallery",
-      "via": "gallery_images"
+      "via": "gallery_images",
+      "collection": "gallery"
     },
     "share": {
       "type": "component",

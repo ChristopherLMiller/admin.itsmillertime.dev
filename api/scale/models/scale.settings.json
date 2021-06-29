@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "gallery_categories",
+  "collectionName": "scales",
   "info": {
-    "name": "Gallery Categories",
+    "name": "Scale",
     "description": ""
   },
   "options": {
@@ -11,12 +11,12 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "title": {
+    "name": {
       "type": "string"
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "name"
     }
   }
 }

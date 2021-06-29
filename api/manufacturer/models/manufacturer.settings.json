@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "gallery_categories",
+  "collectionName": "manufacturers",
   "info": {
-    "name": "Gallery Categories",
+    "name": "Manufacturer",
     "description": ""
   },
   "options": {
@@ -11,12 +11,13 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "title": {
+    "name": {
       "type": "string"
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "name",
+      "required": true
     }
   }
 }

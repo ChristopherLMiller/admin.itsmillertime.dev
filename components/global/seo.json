@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_global_seos",
+  "info": {
+    "name": "SEO",
+    "icon": "indent",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "Sharing": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.share"
+    },
+    "featured_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

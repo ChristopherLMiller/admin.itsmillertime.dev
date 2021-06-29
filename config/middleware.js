@@ -6,6 +6,9 @@ module.exports = {
                 br: true,
                 threshold: 2048
             }
+        },
+	cache: {
+            enabled: true,
         }
     }
 }

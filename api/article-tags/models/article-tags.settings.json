@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "gallery_categories",
+  "collectionName": "article_tags",
   "info": {
-    "name": "Gallery Categories",
+    "name": "Article Tags",
     "description": ""
   },
   "options": {
@@ -12,11 +12,13 @@
   },
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     }
   }
 }

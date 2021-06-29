@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "models",
+  "info": {
+    "name": "Model",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "completed": {
+      "type": "boolean"
+    },
+    "kit_number": {
+      "type": "string"
+    },
+    "year_released": {
+      "type": "integer"
+    },
+    "clockify_project_id": {
+      "type": "string"
+    },
+    "scalemates_link": {
+      "type": "string"
+    },
+    "scale": {
+      "model": "scale"
+    },
+    "manufacturer": {
+      "model": "manufacturer"
+    },
+    "completed_at": {
+      "type": "date"
+    },
+    "youtube_video": {
+      "type": "string"
+    },
+    "model_tags": {
+      "collection": "model-tags"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "PUBLIC",
+        "PRIVATE",
+        "PROTECTED"
+      ],
+      "default": "PUBLIC"
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "users_permissions_roles": {
+      "plugin": "users-permissions",
+      "collection": "role"
+    },
+    "users_permissions_users": {
+      "plugin": "users-permissions",
+      "collection": "user"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.seo"
+    }
+  }
+}

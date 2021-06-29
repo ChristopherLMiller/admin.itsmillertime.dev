@@ -59,5 +59,5 @@ module.exports = {
     return filteredEntities.map((entity) =>
       sanitizeEntity(entity, { model: strapi.models.gallery })
     );
-  },
+  }
 };
