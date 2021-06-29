@@ -1,0 +1,2241 @@
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type ArticleCategory {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  slug: String!
+}
+
+type ArticleCategoryConnection {
+  values: [ArticleCategory]
+  groupBy: ArticleCategoryGroupBy
+  aggregate: ArticleCategoryAggregator
+}
+
+type ArticleCategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ArticleCategoryGroupBy {
+  id: [ArticleCategoryConnectionId]
+  _id: [ArticleCategoryConnection_id]
+  createdAt: [ArticleCategoryConnectionCreatedAt]
+  updatedAt: [ArticleCategoryConnectionUpdatedAt]
+  title: [ArticleCategoryConnectionTitle]
+  slug: [ArticleCategoryConnectionSlug]
+}
+
+type ArticleCategoryConnectionId {
+  key: ID
+  connection: ArticleCategoryConnection
+}
+
+type ArticleCategoryConnection_id {
+  key: ID
+  connection: ArticleCategoryConnection
+}
+
+type ArticleCategoryConnectionCreatedAt {
+  key: DateTime
+  connection: ArticleCategoryConnection
+}
+
+type ArticleCategoryConnectionUpdatedAt {
+  key: DateTime
+  connection: ArticleCategoryConnection
+}
+
+type ArticleCategoryConnectionTitle {
+  key: String
+  connection: ArticleCategoryConnection
+}
+
+type ArticleCategoryConnectionSlug {
+  key: String
+  connection: ArticleCategoryConnection
+}
+
+input ArticleCategoryInput {
+  title: String!
+  slug: String!
+  created_by: ID
+  updated_by: ID
+}
+
+input editArticleCategoryInput {
+  title: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createArticleCategoryInput {
+  data: ArticleCategoryInput
+}
+
+type createArticleCategoryPayload {
+  articleCategory: ArticleCategory
+}
+
+input updateArticleCategoryInput {
+  where: InputID
+  data: editArticleCategoryInput
+}
+
+type updateArticleCategoryPayload {
+  articleCategory: ArticleCategory
+}
+
+input deleteArticleCategoryInput {
+  where: InputID
+}
+
+type deleteArticleCategoryPayload {
+  articleCategory: ArticleCategory
+}
+
+type ArticleTags {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  slug: String!
+}
+
+type ArticleTagsConnection {
+  values: [ArticleTags]
+  groupBy: ArticleTagsGroupBy
+  aggregate: ArticleTagsAggregator
+}
+
+type ArticleTagsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ArticleTagsGroupBy {
+  id: [ArticleTagsConnectionId]
+  _id: [ArticleTagsConnection_id]
+  createdAt: [ArticleTagsConnectionCreatedAt]
+  updatedAt: [ArticleTagsConnectionUpdatedAt]
+  title: [ArticleTagsConnectionTitle]
+  slug: [ArticleTagsConnectionSlug]
+}
+
+type ArticleTagsConnectionId {
+  key: ID
+  connection: ArticleTagsConnection
+}
+
+type ArticleTagsConnection_id {
+  key: ID
+  connection: ArticleTagsConnection
+}
+
+type ArticleTagsConnectionCreatedAt {
+  key: DateTime
+  connection: ArticleTagsConnection
+}
+
+type ArticleTagsConnectionUpdatedAt {
+  key: DateTime
+  connection: ArticleTagsConnection
+}
+
+type ArticleTagsConnectionTitle {
+  key: String
+  connection: ArticleTagsConnection
+}
+
+type ArticleTagsConnectionSlug {
+  key: String
+  connection: ArticleTagsConnection
+}
+
+input ArticleTagInput {
+  title: String!
+  slug: String!
+  created_by: ID
+  updated_by: ID
+}
+
+input editArticleTagInput {
+  title: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createArticleTagInput {
+  data: ArticleTagInput
+}
+
+type createArticleTagPayload {
+  articleTag: ArticleTags
+}
+
+input updateArticleTagInput {
+  where: InputID
+  data: editArticleTagInput
+}
+
+type updateArticleTagPayload {
+  articleTag: ArticleTags
+}
+
+input deleteArticleTagInput {
+  where: InputID
+}
+
+type deleteArticleTagPayload {
+  articleTag: ArticleTags
+}
+
+type Article {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  content: String!
+  featured_image: UploadFile
+  slug: String!
+  users_permissions_user: UsersPermissionsUser
+  excerpt: String
+  published_at: DateTime
+  article_categories(sort: String, limit: Int, start: Int, where: JSON): [ArticleCategory]
+  article_tags(sort: String, limit: Int, start: Int, where: JSON): [ArticleTags]
+}
+
+type ArticleConnection {
+  values: [Article]
+  groupBy: ArticleGroupBy
+  aggregate: ArticleAggregator
+}
+
+type ArticleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ArticleGroupBy {
+  id: [ArticleConnectionId]
+  _id: [ArticleConnection_id]
+  createdAt: [ArticleConnectionCreatedAt]
+  updatedAt: [ArticleConnectionUpdatedAt]
+  title: [ArticleConnectionTitle]
+  content: [ArticleConnectionContent]
+  featured_image: [ArticleConnectionFeatured_image]
+  slug: [ArticleConnectionSlug]
+  users_permissions_user: [ArticleConnectionUsers_permissions_user]
+  excerpt: [ArticleConnectionExcerpt]
+  published_at: [ArticleConnectionPublished_at]
+}
+
+type ArticleConnectionId {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnection_id {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnectionCreatedAt {
+  key: DateTime
+  connection: ArticleConnection
+}
+
+type ArticleConnectionUpdatedAt {
+  key: DateTime
+  connection: ArticleConnection
+}
+
+type ArticleConnectionTitle {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionContent {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionFeatured_image {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnectionSlug {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionUsers_permissions_user {
+  key: ID
+  connection: ArticleConnection
+}
+
+type ArticleConnectionExcerpt {
+  key: String
+  connection: ArticleConnection
+}
+
+type ArticleConnectionPublished_at {
+  key: DateTime
+  connection: ArticleConnection
+}
+
+input ArticleInput {
+  title: String!
+  content: String!
+  featured_image: ID
+  slug: String!
+  users_permissions_user: ID
+  article_categories: [ID]
+  article_tags: [ID]
+  excerpt: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editArticleInput {
+  title: String
+  content: String
+  featured_image: ID
+  slug: String
+  users_permissions_user: ID
+  article_categories: [ID]
+  article_tags: [ID]
+  excerpt: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createArticleInput {
+  data: ArticleInput
+}
+
+type createArticlePayload {
+  article: Article
+}
+
+input updateArticleInput {
+  where: InputID
+  data: editArticleInput
+}
+
+type updateArticlePayload {
+  article: Article
+}
+
+input deleteArticleInput {
+  where: InputID
+}
+
+type deleteArticlePayload {
+  article: Article
+}
+
+type GalleryCategories {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  slug: String
+}
+
+type GalleryCategoriesConnection {
+  values: [GalleryCategories]
+  groupBy: GalleryCategoriesGroupBy
+  aggregate: GalleryCategoriesAggregator
+}
+
+type GalleryCategoriesAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GalleryCategoriesGroupBy {
+  id: [GalleryCategoriesConnectionId]
+  _id: [GalleryCategoriesConnection_id]
+  createdAt: [GalleryCategoriesConnectionCreatedAt]
+  updatedAt: [GalleryCategoriesConnectionUpdatedAt]
+  title: [GalleryCategoriesConnectionTitle]
+  slug: [GalleryCategoriesConnectionSlug]
+}
+
+type GalleryCategoriesConnectionId {
+  key: ID
+  connection: GalleryCategoriesConnection
+}
+
+type GalleryCategoriesConnection_id {
+  key: ID
+  connection: GalleryCategoriesConnection
+}
+
+type GalleryCategoriesConnectionCreatedAt {
+  key: DateTime
+  connection: GalleryCategoriesConnection
+}
+
+type GalleryCategoriesConnectionUpdatedAt {
+  key: DateTime
+  connection: GalleryCategoriesConnection
+}
+
+type GalleryCategoriesConnectionTitle {
+  key: String
+  connection: GalleryCategoriesConnection
+}
+
+type GalleryCategoriesConnectionSlug {
+  key: String
+  connection: GalleryCategoriesConnection
+}
+
+input GalleryCategoryInput {
+  title: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editGalleryCategoryInput {
+  title: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createGalleryCategoryInput {
+  data: GalleryCategoryInput
+}
+
+type createGalleryCategoryPayload {
+  galleryCategory: GalleryCategories
+}
+
+input updateGalleryCategoryInput {
+  where: InputID
+  data: editGalleryCategoryInput
+}
+
+type updateGalleryCategoryPayload {
+  galleryCategory: GalleryCategories
+}
+
+input deleteGalleryCategoryInput {
+  where: InputID
+}
+
+type deleteGalleryCategoryPayload {
+  galleryCategory: GalleryCategories
+}
+
+type GalleryImage {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  caption: String
+  slug: String
+  watermarked: UploadFile
+  clean: UploadFile
+  share: ComponentGlobalShare
+  sell: ComponentGlobalSell
+  galleries(sort: String, limit: Int, start: Int, where: JSON): [Gallery]
+}
+
+type GalleryImageConnection {
+  values: [GalleryImage]
+  groupBy: GalleryImageGroupBy
+  aggregate: GalleryImageAggregator
+}
+
+type GalleryImageAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GalleryImageGroupBy {
+  id: [GalleryImageConnectionId]
+  _id: [GalleryImageConnection_id]
+  createdAt: [GalleryImageConnectionCreatedAt]
+  updatedAt: [GalleryImageConnectionUpdatedAt]
+  caption: [GalleryImageConnectionCaption]
+  slug: [GalleryImageConnectionSlug]
+  watermarked: [GalleryImageConnectionWatermarked]
+  clean: [GalleryImageConnectionClean]
+  share: [GalleryImageConnectionShare]
+  sell: [GalleryImageConnectionSell]
+}
+
+type GalleryImageConnectionId {
+  key: ID
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnection_id {
+  key: ID
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionCreatedAt {
+  key: DateTime
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionUpdatedAt {
+  key: DateTime
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionCaption {
+  key: String
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionSlug {
+  key: String
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionWatermarked {
+  key: ID
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionClean {
+  key: ID
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionShare {
+  key: ID
+  connection: GalleryImageConnection
+}
+
+type GalleryImageConnectionSell {
+  key: ID
+  connection: GalleryImageConnection
+}
+
+input GalleryImageInput {
+  caption: String
+  slug: String
+  watermarked: ID
+  clean: ID
+  galleries: [ID]
+  share: ComponentGlobalShareInput
+  sell: ComponentGlobalSellInput
+  created_by: ID
+  updated_by: ID
+}
+
+input editGalleryImageInput {
+  caption: String
+  slug: String
+  watermarked: ID
+  clean: ID
+  galleries: [ID]
+  share: editComponentGlobalShareInput
+  sell: editComponentGlobalSellInput
+  created_by: ID
+  updated_by: ID
+}
+
+input createGalleryImageInput {
+  data: GalleryImageInput
+}
+
+type createGalleryImagePayload {
+  galleryImage: GalleryImage
+}
+
+input updateGalleryImageInput {
+  where: InputID
+  data: editGalleryImageInput
+}
+
+type updateGalleryImagePayload {
+  galleryImage: GalleryImage
+}
+
+input deleteGalleryImageInput {
+  where: InputID
+}
+
+type deleteGalleryImagePayload {
+  galleryImage: GalleryImage
+}
+
+type GalleryTags {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  slug: String
+}
+
+type GalleryTagsConnection {
+  values: [GalleryTags]
+  groupBy: GalleryTagsGroupBy
+  aggregate: GalleryTagsAggregator
+}
+
+type GalleryTagsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GalleryTagsGroupBy {
+  id: [GalleryTagsConnectionId]
+  _id: [GalleryTagsConnection_id]
+  createdAt: [GalleryTagsConnectionCreatedAt]
+  updatedAt: [GalleryTagsConnectionUpdatedAt]
+  title: [GalleryTagsConnectionTitle]
+  slug: [GalleryTagsConnectionSlug]
+}
+
+type GalleryTagsConnectionId {
+  key: ID
+  connection: GalleryTagsConnection
+}
+
+type GalleryTagsConnection_id {
+  key: ID
+  connection: GalleryTagsConnection
+}
+
+type GalleryTagsConnectionCreatedAt {
+  key: DateTime
+  connection: GalleryTagsConnection
+}
+
+type GalleryTagsConnectionUpdatedAt {
+  key: DateTime
+  connection: GalleryTagsConnection
+}
+
+type GalleryTagsConnectionTitle {
+  key: String
+  connection: GalleryTagsConnection
+}
+
+type GalleryTagsConnectionSlug {
+  key: String
+  connection: GalleryTagsConnection
+}
+
+input GalleryTagInput {
+  title: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editGalleryTagInput {
+  title: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createGalleryTagInput {
+  data: GalleryTagInput
+}
+
+type createGalleryTagPayload {
+  galleryTag: GalleryTags
+}
+
+input updateGalleryTagInput {
+  where: InputID
+  data: editGalleryTagInput
+}
+
+type updateGalleryTagPayload {
+  galleryTag: GalleryTags
+}
+
+input deleteGalleryTagInput {
+  where: InputID
+}
+
+type deleteGalleryTagPayload {
+  galleryTag: GalleryTags
+}
+
+enum ENUM_GALLERY_STATUS {
+  PUBLIC
+  PROTECTED
+  DRAFT
+  ARCHIVED
+  PRIVATE
+}
+
+type Gallery {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  slug: String
+  featured_image: UploadFile
+  status: ENUM_GALLERY_STATUS!
+  nsfw: Boolean
+  meta: String
+  description: String
+  gallery_categories(sort: String, limit: Int, start: Int, where: JSON): [GalleryCategories]
+  gallery_tags(sort: String, limit: Int, start: Int, where: JSON): [GalleryTags]
+  roles(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsRole]
+  gallery_images(sort: String, limit: Int, start: Int, where: JSON): [GalleryImage]
+  users_permissions_users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type GalleryConnection {
+  values: [Gallery]
+  groupBy: GalleryGroupBy
+  aggregate: GalleryAggregator
+}
+
+type GalleryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GalleryGroupBy {
+  id: [GalleryConnectionId]
+  _id: [GalleryConnection_id]
+  createdAt: [GalleryConnectionCreatedAt]
+  updatedAt: [GalleryConnectionUpdatedAt]
+  title: [GalleryConnectionTitle]
+  slug: [GalleryConnectionSlug]
+  featured_image: [GalleryConnectionFeatured_image]
+  status: [GalleryConnectionStatus]
+  nsfw: [GalleryConnectionNsfw]
+  meta: [GalleryConnectionMeta]
+  description: [GalleryConnectionDescription]
+}
+
+type GalleryConnectionId {
+  key: ID
+  connection: GalleryConnection
+}
+
+type GalleryConnection_id {
+  key: ID
+  connection: GalleryConnection
+}
+
+type GalleryConnectionCreatedAt {
+  key: DateTime
+  connection: GalleryConnection
+}
+
+type GalleryConnectionUpdatedAt {
+  key: DateTime
+  connection: GalleryConnection
+}
+
+type GalleryConnectionTitle {
+  key: String
+  connection: GalleryConnection
+}
+
+type GalleryConnectionSlug {
+  key: String
+  connection: GalleryConnection
+}
+
+type GalleryConnectionFeatured_image {
+  key: ID
+  connection: GalleryConnection
+}
+
+type GalleryConnectionStatus {
+  key: String
+  connection: GalleryConnection
+}
+
+type GalleryConnectionNsfw {
+  key: Boolean
+  connection: GalleryConnection
+}
+
+type GalleryConnectionMeta {
+  key: String
+  connection: GalleryConnection
+}
+
+type GalleryConnectionDescription {
+  key: String
+  connection: GalleryConnection
+}
+
+input GalleryInput {
+  title: String
+  slug: String
+  featured_image: ID
+  gallery_categories: [ID]
+  gallery_tags: [ID]
+  roles: [ID]
+  gallery_images: [ID]
+  status: ENUM_GALLERY_STATUS
+  nsfw: Boolean
+  meta: String
+  description: String
+  users_permissions_users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editGalleryInput {
+  title: String
+  slug: String
+  featured_image: ID
+  gallery_categories: [ID]
+  gallery_tags: [ID]
+  roles: [ID]
+  gallery_images: [ID]
+  status: ENUM_GALLERY_STATUS
+  nsfw: Boolean
+  meta: String
+  description: String
+  users_permissions_users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createGalleryInput {
+  data: GalleryInput
+}
+
+type createGalleryPayload {
+  gallery: Gallery
+}
+
+input updateGalleryInput {
+  where: InputID
+  data: editGalleryInput
+}
+
+type updateGalleryPayload {
+  gallery: Gallery
+}
+
+input deleteGalleryInput {
+  where: InputID
+}
+
+type deleteGalleryPayload {
+  gallery: Gallery
+}
+
+type Gardens {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  slug: String!
+  contents: String!
+}
+
+type GardensConnection {
+  values: [Gardens]
+  groupBy: GardensGroupBy
+  aggregate: GardensAggregator
+}
+
+type GardensAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type GardensGroupBy {
+  id: [GardensConnectionId]
+  _id: [GardensConnection_id]
+  createdAt: [GardensConnectionCreatedAt]
+  updatedAt: [GardensConnectionUpdatedAt]
+  title: [GardensConnectionTitle]
+  slug: [GardensConnectionSlug]
+  contents: [GardensConnectionContents]
+}
+
+type GardensConnectionId {
+  key: ID
+  connection: GardensConnection
+}
+
+type GardensConnection_id {
+  key: ID
+  connection: GardensConnection
+}
+
+type GardensConnectionCreatedAt {
+  key: DateTime
+  connection: GardensConnection
+}
+
+type GardensConnectionUpdatedAt {
+  key: DateTime
+  connection: GardensConnection
+}
+
+type GardensConnectionTitle {
+  key: String
+  connection: GardensConnection
+}
+
+type GardensConnectionSlug {
+  key: String
+  connection: GardensConnection
+}
+
+type GardensConnectionContents {
+  key: String
+  connection: GardensConnection
+}
+
+input GardenInput {
+  title: String!
+  slug: String!
+  contents: String!
+  created_by: ID
+  updated_by: ID
+}
+
+input editGardenInput {
+  title: String
+  slug: String
+  contents: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createGardenInput {
+  data: GardenInput
+}
+
+type createGardenPayload {
+  garden: Gardens
+}
+
+input updateGardenInput {
+  where: InputID
+  data: editGardenInput
+}
+
+type updateGardenPayload {
+  garden: Gardens
+}
+
+input deleteGardenInput {
+  where: InputID
+}
+
+type deleteGardenPayload {
+  garden: Gardens
+}
+
+type Manufacturer {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  slug: String!
+}
+
+type ManufacturerConnection {
+  values: [Manufacturer]
+  groupBy: ManufacturerGroupBy
+  aggregate: ManufacturerAggregator
+}
+
+type ManufacturerAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ManufacturerGroupBy {
+  id: [ManufacturerConnectionId]
+  _id: [ManufacturerConnection_id]
+  createdAt: [ManufacturerConnectionCreatedAt]
+  updatedAt: [ManufacturerConnectionUpdatedAt]
+  name: [ManufacturerConnectionName]
+  slug: [ManufacturerConnectionSlug]
+}
+
+type ManufacturerConnectionId {
+  key: ID
+  connection: ManufacturerConnection
+}
+
+type ManufacturerConnection_id {
+  key: ID
+  connection: ManufacturerConnection
+}
+
+type ManufacturerConnectionCreatedAt {
+  key: DateTime
+  connection: ManufacturerConnection
+}
+
+type ManufacturerConnectionUpdatedAt {
+  key: DateTime
+  connection: ManufacturerConnection
+}
+
+type ManufacturerConnectionName {
+  key: String
+  connection: ManufacturerConnection
+}
+
+type ManufacturerConnectionSlug {
+  key: String
+  connection: ManufacturerConnection
+}
+
+input ManufacturerInput {
+  name: String
+  slug: String!
+  created_by: ID
+  updated_by: ID
+}
+
+input editManufacturerInput {
+  name: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createManufacturerInput {
+  data: ManufacturerInput
+}
+
+type createManufacturerPayload {
+  manufacturer: Manufacturer
+}
+
+input updateManufacturerInput {
+  where: InputID
+  data: editManufacturerInput
+}
+
+type updateManufacturerPayload {
+  manufacturer: Manufacturer
+}
+
+input deleteManufacturerInput {
+  where: InputID
+}
+
+type deleteManufacturerPayload {
+  manufacturer: Manufacturer
+}
+
+type ModelTags {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  slug: String
+}
+
+type ModelTagsConnection {
+  values: [ModelTags]
+  groupBy: ModelTagsGroupBy
+  aggregate: ModelTagsAggregator
+}
+
+type ModelTagsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ModelTagsGroupBy {
+  id: [ModelTagsConnectionId]
+  _id: [ModelTagsConnection_id]
+  createdAt: [ModelTagsConnectionCreatedAt]
+  updatedAt: [ModelTagsConnectionUpdatedAt]
+  name: [ModelTagsConnectionName]
+  slug: [ModelTagsConnectionSlug]
+}
+
+type ModelTagsConnectionId {
+  key: ID
+  connection: ModelTagsConnection
+}
+
+type ModelTagsConnection_id {
+  key: ID
+  connection: ModelTagsConnection
+}
+
+type ModelTagsConnectionCreatedAt {
+  key: DateTime
+  connection: ModelTagsConnection
+}
+
+type ModelTagsConnectionUpdatedAt {
+  key: DateTime
+  connection: ModelTagsConnection
+}
+
+type ModelTagsConnectionName {
+  key: String
+  connection: ModelTagsConnection
+}
+
+type ModelTagsConnectionSlug {
+  key: String
+  connection: ModelTagsConnection
+}
+
+input ModelTagInput {
+  name: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editModelTagInput {
+  name: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createModelTagInput {
+  data: ModelTagInput
+}
+
+type createModelTagPayload {
+  modelTag: ModelTags
+}
+
+input updateModelTagInput {
+  where: InputID
+  data: editModelTagInput
+}
+
+type updateModelTagPayload {
+  modelTag: ModelTags
+}
+
+input deleteModelTagInput {
+  where: InputID
+}
+
+type deleteModelTagPayload {
+  modelTag: ModelTags
+}
+
+enum ENUM_MODEL_STATUS {
+  PUBLIC
+  PRIVATE
+  PROTECTED
+}
+
+type Model {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  slug: String
+  content: String
+  completed: Boolean
+  kit_number: String
+  year_released: Int
+  clockify_project_id: String
+  scalemates_link: String
+  scale: Scale
+  manufacturer: Manufacturer
+  completed_at: Date
+  youtube_video: String
+  status: ENUM_MODEL_STATUS
+  SEO: ComponentGlobalSeo
+  published_at: DateTime
+  model_tags(sort: String, limit: Int, start: Int, where: JSON): [ModelTags]
+  images(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  users_permissions_roles(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsRole]
+  users_permissions_users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type ModelConnection {
+  values: [Model]
+  groupBy: ModelGroupBy
+  aggregate: ModelAggregator
+}
+
+type ModelAggregator {
+  count: Int
+  totalCount: Int
+  sum: ModelAggregatorSum
+  avg: ModelAggregatorAvg
+  min: ModelAggregatorMin
+  max: ModelAggregatorMax
+}
+
+type ModelAggregatorSum {
+  year_released: Float
+}
+
+type ModelAggregatorAvg {
+  year_released: Float
+}
+
+type ModelAggregatorMin {
+  year_released: Float
+}
+
+type ModelAggregatorMax {
+  year_released: Float
+}
+
+type ModelGroupBy {
+  id: [ModelConnectionId]
+  _id: [ModelConnection_id]
+  createdAt: [ModelConnectionCreatedAt]
+  updatedAt: [ModelConnectionUpdatedAt]
+  title: [ModelConnectionTitle]
+  slug: [ModelConnectionSlug]
+  content: [ModelConnectionContent]
+  completed: [ModelConnectionCompleted]
+  kit_number: [ModelConnectionKit_number]
+  year_released: [ModelConnectionYear_released]
+  clockify_project_id: [ModelConnectionClockify_project_id]
+  scalemates_link: [ModelConnectionScalemates_link]
+  scale: [ModelConnectionScale]
+  manufacturer: [ModelConnectionManufacturer]
+  completed_at: [ModelConnectionCompleted_at]
+  youtube_video: [ModelConnectionYoutube_video]
+  status: [ModelConnectionStatus]
+  SEO: [ModelConnectionSEO]
+  published_at: [ModelConnectionPublished_at]
+}
+
+type ModelConnectionId {
+  key: ID
+  connection: ModelConnection
+}
+
+type ModelConnection_id {
+  key: ID
+  connection: ModelConnection
+}
+
+type ModelConnectionCreatedAt {
+  key: DateTime
+  connection: ModelConnection
+}
+
+type ModelConnectionUpdatedAt {
+  key: DateTime
+  connection: ModelConnection
+}
+
+type ModelConnectionTitle {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionSlug {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionContent {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionCompleted {
+  key: Boolean
+  connection: ModelConnection
+}
+
+type ModelConnectionKit_number {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionYear_released {
+  key: Int
+  connection: ModelConnection
+}
+
+type ModelConnectionClockify_project_id {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionScalemates_link {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionScale {
+  key: ID
+  connection: ModelConnection
+}
+
+type ModelConnectionManufacturer {
+  key: ID
+  connection: ModelConnection
+}
+
+type ModelConnectionCompleted_at {
+  key: ID
+  connection: ModelConnection
+}
+
+type ModelConnectionYoutube_video {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionStatus {
+  key: String
+  connection: ModelConnection
+}
+
+type ModelConnectionSEO {
+  key: ID
+  connection: ModelConnection
+}
+
+type ModelConnectionPublished_at {
+  key: DateTime
+  connection: ModelConnection
+}
+
+input ModelInput {
+  title: String
+  slug: String
+  content: String
+  completed: Boolean
+  kit_number: String
+  year_released: Int
+  clockify_project_id: String
+  scalemates_link: String
+  scale: ID
+  manufacturer: ID
+  completed_at: Date
+  youtube_video: String
+  model_tags: [ID]
+  status: ENUM_MODEL_STATUS
+  images: [ID]
+  users_permissions_roles: [ID]
+  users_permissions_users: [ID]
+  SEO: ComponentGlobalSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editModelInput {
+  title: String
+  slug: String
+  content: String
+  completed: Boolean
+  kit_number: String
+  year_released: Int
+  clockify_project_id: String
+  scalemates_link: String
+  scale: ID
+  manufacturer: ID
+  completed_at: Date
+  youtube_video: String
+  model_tags: [ID]
+  status: ENUM_MODEL_STATUS
+  images: [ID]
+  users_permissions_roles: [ID]
+  users_permissions_users: [ID]
+  SEO: editComponentGlobalSeoInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createModelInput {
+  data: ModelInput
+}
+
+type createModelPayload {
+  model: Model
+}
+
+input updateModelInput {
+  where: InputID
+  data: editModelInput
+}
+
+type updateModelPayload {
+  model: Model
+}
+
+input deleteModelInput {
+  where: InputID
+}
+
+type deleteModelPayload {
+  model: Model
+}
+
+type Scale {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  slug: String
+}
+
+type ScaleConnection {
+  values: [Scale]
+  groupBy: ScaleGroupBy
+  aggregate: ScaleAggregator
+}
+
+type ScaleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ScaleGroupBy {
+  id: [ScaleConnectionId]
+  _id: [ScaleConnection_id]
+  createdAt: [ScaleConnectionCreatedAt]
+  updatedAt: [ScaleConnectionUpdatedAt]
+  name: [ScaleConnectionName]
+  slug: [ScaleConnectionSlug]
+}
+
+type ScaleConnectionId {
+  key: ID
+  connection: ScaleConnection
+}
+
+type ScaleConnection_id {
+  key: ID
+  connection: ScaleConnection
+}
+
+type ScaleConnectionCreatedAt {
+  key: DateTime
+  connection: ScaleConnection
+}
+
+type ScaleConnectionUpdatedAt {
+  key: DateTime
+  connection: ScaleConnection
+}
+
+type ScaleConnectionName {
+  key: String
+  connection: ScaleConnection
+}
+
+type ScaleConnectionSlug {
+  key: String
+  connection: ScaleConnection
+}
+
+input ScaleInput {
+  name: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editScaleInput {
+  name: String
+  slug: String
+  created_by: ID
+  updated_by: ID
+}
+
+input createScaleInput {
+  data: ScaleInput
+}
+
+type createScalePayload {
+  scale: Scale
+}
+
+input updateScaleInput {
+  where: InputID
+  data: editScaleInput
+}
+
+type updateScalePayload {
+  scale: Scale
+}
+
+input deleteScaleInput {
+  where: InputID
+}
+
+type deleteScalePayload {
+  scale: Scale
+}
+
+type UploadFile {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  _id: [UploadFileConnection_id]
+  createdAt: [UploadFileConnectionCreatedAt]
+  updatedAt: [UploadFileConnectionUpdatedAt]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnection_id {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  _id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  _id: [UsersPermissionsRoleConnection_id]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnection_id {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+  article: Article
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  _id: [UsersPermissionsUserConnection_id]
+  createdAt: [UsersPermissionsUserConnectionCreatedAt]
+  updatedAt: [UsersPermissionsUserConnectionUpdatedAt]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+  article: [UsersPermissionsUserConnectionArticle]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnection_id {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreatedAt {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdatedAt {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionArticle {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  article: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  article: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+type ComponentGlobalSell {
+  id: ID!
+  _id: ID!
+  price: Int!
+}
+
+input ComponentGlobalSellInput {
+  price: Int!
+}
+
+input editComponentGlobalSellInput {
+  id: ID
+  price: Int
+}
+
+type ComponentGlobalSeo {
+  id: ID!
+  _id: ID!
+  title: String
+  description: String
+  Sharing: ComponentGlobalShare
+  featured_image: UploadFile
+}
+
+input ComponentGlobalSeoInput {
+  title: String
+  description: String
+  Sharing: ComponentGlobalShareInput
+  featured_image: ID
+}
+
+input editComponentGlobalSeoInput {
+  id: ID
+  title: String
+  description: String
+  Sharing: editComponentGlobalShareInput
+  featured_image: ID
+}
+
+type ComponentGlobalShare {
+  id: ID!
+  _id: ID!
+  facebook: Boolean
+  twitter: Boolean
+  instagram: Boolean
+}
+
+input ComponentGlobalShareInput {
+  facebook: Boolean
+  twitter: Boolean
+  instagram: Boolean
+}
+
+input editComponentGlobalShareInput {
+  id: ID
+  facebook: Boolean
+  twitter: Boolean
+  instagram: Boolean
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | ArticleCategory | ArticleCategoryConnection | ArticleCategoryAggregator | ArticleCategoryGroupBy | ArticleCategoryConnectionId | ArticleCategoryConnection_id | ArticleCategoryConnectionCreatedAt | ArticleCategoryConnectionUpdatedAt | ArticleCategoryConnectionTitle | ArticleCategoryConnectionSlug | createArticleCategoryPayload | updateArticleCategoryPayload | deleteArticleCategoryPayload | ArticleTags | ArticleTagsConnection | ArticleTagsAggregator | ArticleTagsGroupBy | ArticleTagsConnectionId | ArticleTagsConnection_id | ArticleTagsConnectionCreatedAt | ArticleTagsConnectionUpdatedAt | ArticleTagsConnectionTitle | ArticleTagsConnectionSlug | createArticleTagPayload | updateArticleTagPayload | deleteArticleTagPayload | Article | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnectionId | ArticleConnection_id | ArticleConnectionCreatedAt | ArticleConnectionUpdatedAt | ArticleConnectionTitle | ArticleConnectionContent | ArticleConnectionFeatured_image | ArticleConnectionSlug | ArticleConnectionUsers_permissions_user | ArticleConnectionExcerpt | ArticleConnectionPublished_at | createArticlePayload | updateArticlePayload | deleteArticlePayload | GalleryCategories | GalleryCategoriesConnection | GalleryCategoriesAggregator | GalleryCategoriesGroupBy | GalleryCategoriesConnectionId | GalleryCategoriesConnection_id | GalleryCategoriesConnectionCreatedAt | GalleryCategoriesConnectionUpdatedAt | GalleryCategoriesConnectionTitle | GalleryCategoriesConnectionSlug | createGalleryCategoryPayload | updateGalleryCategoryPayload | deleteGalleryCategoryPayload | GalleryImage | GalleryImageConnection | GalleryImageAggregator | GalleryImageGroupBy | GalleryImageConnectionId | GalleryImageConnection_id | GalleryImageConnectionCreatedAt | GalleryImageConnectionUpdatedAt | GalleryImageConnectionCaption | GalleryImageConnectionSlug | GalleryImageConnectionWatermarked | GalleryImageConnectionClean | GalleryImageConnectionShare | GalleryImageConnectionSell | createGalleryImagePayload | updateGalleryImagePayload | deleteGalleryImagePayload | GalleryTags | GalleryTagsConnection | GalleryTagsAggregator | GalleryTagsGroupBy | GalleryTagsConnectionId | GalleryTagsConnection_id | GalleryTagsConnectionCreatedAt | GalleryTagsConnectionUpdatedAt | GalleryTagsConnectionTitle | GalleryTagsConnectionSlug | createGalleryTagPayload | updateGalleryTagPayload | deleteGalleryTagPayload | Gallery | GalleryConnection | GalleryAggregator | GalleryGroupBy | GalleryConnectionId | GalleryConnection_id | GalleryConnectionCreatedAt | GalleryConnectionUpdatedAt | GalleryConnectionTitle | GalleryConnectionSlug | GalleryConnectionFeatured_image | GalleryConnectionStatus | GalleryConnectionNsfw | GalleryConnectionMeta | GalleryConnectionDescription | createGalleryPayload | updateGalleryPayload | deleteGalleryPayload | Gardens | GardensConnection | GardensAggregator | GardensGroupBy | GardensConnectionId | GardensConnection_id | GardensConnectionCreatedAt | GardensConnectionUpdatedAt | GardensConnectionTitle | GardensConnectionSlug | GardensConnectionContents | createGardenPayload | updateGardenPayload | deleteGardenPayload | Manufacturer | ManufacturerConnection | ManufacturerAggregator | ManufacturerGroupBy | ManufacturerConnectionId | ManufacturerConnection_id | ManufacturerConnectionCreatedAt | ManufacturerConnectionUpdatedAt | ManufacturerConnectionName | ManufacturerConnectionSlug | createManufacturerPayload | updateManufacturerPayload | deleteManufacturerPayload | ModelTags | ModelTagsConnection | ModelTagsAggregator | ModelTagsGroupBy | ModelTagsConnectionId | ModelTagsConnection_id | ModelTagsConnectionCreatedAt | ModelTagsConnectionUpdatedAt | ModelTagsConnectionName | ModelTagsConnectionSlug | createModelTagPayload | updateModelTagPayload | deleteModelTagPayload | Model | ModelConnection | ModelAggregator | ModelAggregatorSum | ModelAggregatorAvg | ModelAggregatorMin | ModelAggregatorMax | ModelGroupBy | ModelConnectionId | ModelConnection_id | ModelConnectionCreatedAt | ModelConnectionUpdatedAt | ModelConnectionTitle | ModelConnectionSlug | ModelConnectionContent | ModelConnectionCompleted | ModelConnectionKit_number | ModelConnectionYear_released | ModelConnectionClockify_project_id | ModelConnectionScalemates_link | ModelConnectionScale | ModelConnectionManufacturer | ModelConnectionCompleted_at | ModelConnectionYoutube_video | ModelConnectionStatus | ModelConnectionSEO | ModelConnectionPublished_at | createModelPayload | updateModelPayload | deleteModelPayload | Scale | ScaleConnection | ScaleAggregator | ScaleGroupBy | ScaleConnectionId | ScaleConnection_id | ScaleConnectionCreatedAt | ScaleConnectionUpdatedAt | ScaleConnectionName | ScaleConnectionSlug | createScalePayload | updateScalePayload | deleteScalePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionArticle | createUserPayload | updateUserPayload | deleteUserPayload | ComponentGlobalSell | ComponentGlobalSeo | ComponentGlobalShare
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  articleCategory(id: ID!, publicationState: PublicationState): ArticleCategory
+  articleCategories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [ArticleCategory]
+  articleCategoriesConnection(sort: String, limit: Int, start: Int, where: JSON): ArticleCategoryConnection
+  articleTag(id: ID!, publicationState: PublicationState): ArticleTags
+  articleTags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [ArticleTags]
+  articleTagsConnection(sort: String, limit: Int, start: Int, where: JSON): ArticleTagsConnection
+  article(id: ID!, publicationState: PublicationState): Article
+  articles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Article]
+  articlesConnection(sort: String, limit: Int, start: Int, where: JSON): ArticleConnection
+  galleryCategory(id: ID!, publicationState: PublicationState): GalleryCategories
+  galleryCategories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GalleryCategories]
+  galleryCategoriesConnection(sort: String, limit: Int, start: Int, where: JSON): GalleryCategoriesConnection
+  galleryImage(id: ID!, publicationState: PublicationState): GalleryImage
+  galleryImages(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GalleryImage]
+  galleryImagesConnection(sort: String, limit: Int, start: Int, where: JSON): GalleryImageConnection
+  galleryTag(id: ID!, publicationState: PublicationState): GalleryTags
+  galleryTags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [GalleryTags]
+  galleryTagsConnection(sort: String, limit: Int, start: Int, where: JSON): GalleryTagsConnection
+  gallery(id: ID!, publicationState: PublicationState): Gallery
+  galleries(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Gallery]
+  galleriesConnection(sort: String, limit: Int, start: Int, where: JSON): GalleryConnection
+  garden(id: ID!, publicationState: PublicationState): Gardens
+  gardens(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Gardens]
+  gardensConnection(sort: String, limit: Int, start: Int, where: JSON): GardensConnection
+  manufacturer(id: ID!, publicationState: PublicationState): Manufacturer
+  manufacturers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Manufacturer]
+  manufacturersConnection(sort: String, limit: Int, start: Int, where: JSON): ManufacturerConnection
+  modelTag(id: ID!, publicationState: PublicationState): ModelTags
+  modelTags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [ModelTags]
+  modelTagsConnection(sort: String, limit: Int, start: Int, where: JSON): ModelTagsConnection
+  model(id: ID!, publicationState: PublicationState): Model
+  models(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Model]
+  modelsConnection(sort: String, limit: Int, start: Int, where: JSON): ModelConnection
+  scale(id: ID!, publicationState: PublicationState): Scale
+  scales(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Scale]
+  scalesConnection(sort: String, limit: Int, start: Int, where: JSON): ScaleConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createArticleCategory(input: createArticleCategoryInput): createArticleCategoryPayload
+  updateArticleCategory(input: updateArticleCategoryInput): updateArticleCategoryPayload
+  deleteArticleCategory(input: deleteArticleCategoryInput): deleteArticleCategoryPayload
+  createArticleTag(input: createArticleTagInput): createArticleTagPayload
+  updateArticleTag(input: updateArticleTagInput): updateArticleTagPayload
+  deleteArticleTag(input: deleteArticleTagInput): deleteArticleTagPayload
+  createArticle(input: createArticleInput): createArticlePayload
+  updateArticle(input: updateArticleInput): updateArticlePayload
+  deleteArticle(input: deleteArticleInput): deleteArticlePayload
+  createGalleryCategory(input: createGalleryCategoryInput): createGalleryCategoryPayload
+  updateGalleryCategory(input: updateGalleryCategoryInput): updateGalleryCategoryPayload
+  deleteGalleryCategory(input: deleteGalleryCategoryInput): deleteGalleryCategoryPayload
+  createGalleryImage(input: createGalleryImageInput): createGalleryImagePayload
+  updateGalleryImage(input: updateGalleryImageInput): updateGalleryImagePayload
+  deleteGalleryImage(input: deleteGalleryImageInput): deleteGalleryImagePayload
+  createGalleryTag(input: createGalleryTagInput): createGalleryTagPayload
+  updateGalleryTag(input: updateGalleryTagInput): updateGalleryTagPayload
+  deleteGalleryTag(input: deleteGalleryTagInput): deleteGalleryTagPayload
+  createGallery(input: createGalleryInput): createGalleryPayload
+  updateGallery(input: updateGalleryInput): updateGalleryPayload
+  deleteGallery(input: deleteGalleryInput): deleteGalleryPayload
+  createGarden(input: createGardenInput): createGardenPayload
+  updateGarden(input: updateGardenInput): updateGardenPayload
+  deleteGarden(input: deleteGardenInput): deleteGardenPayload
+  createManufacturer(input: createManufacturerInput): createManufacturerPayload
+  updateManufacturer(input: updateManufacturerInput): updateManufacturerPayload
+  deleteManufacturer(input: deleteManufacturerInput): deleteManufacturerPayload
+  createModelTag(input: createModelTagInput): createModelTagPayload
+  updateModelTag(input: updateModelTagInput): updateModelTagPayload
+  deleteModelTag(input: deleteModelTagInput): deleteModelTagPayload
+  createModel(input: createModelInput): createModelPayload
+  updateModel(input: updateModelInput): updateModelPayload
+  deleteModel(input: deleteModelInput): deleteModelPayload
+  createScale(input: createScaleInput): createScalePayload
+  updateScale(input: updateScaleInput): updateScalePayload
+  deleteScale(input: deleteScaleInput): deleteScalePayload
+
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
