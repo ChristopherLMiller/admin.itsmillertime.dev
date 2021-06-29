@@ -8,15 +8,11 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "string"
-    },
-    "Sharing": {
-      "type": "component",
-      "repeatable": false,
-      "component": "global.share"
     },
     "featured_image": {
       "model": "file",
@@ -29,6 +25,11 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
+      "required": true
     }
   }
 }

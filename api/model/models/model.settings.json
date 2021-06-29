@@ -14,10 +14,6 @@
     "title": {
       "type": "string"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
     "content": {
       "type": "richtext"
     },
@@ -84,6 +80,11 @@
       "type": "component",
       "repeatable": false,
       "component": "global.seo"
+    },
+    "sharing": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.share"
     }
   }
 }
