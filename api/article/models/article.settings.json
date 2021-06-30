@@ -19,16 +19,6 @@
       "type": "richtext",
       "required": true
     },
-    "featured_image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
     "slug": {
       "type": "uid",
       "required": true,
@@ -45,8 +35,11 @@
     "article_tags": {
       "collection": "article-tags"
     },
-    "excerpt": {
-      "type": "text"
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.seo",
+      "required": true
     }
   }
 }

@@ -85,6 +85,11 @@
       "type": "component",
       "repeatable": false,
       "component": "global.share"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
     }
   }
 }
