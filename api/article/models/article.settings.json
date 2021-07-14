@@ -24,11 +24,6 @@
       "required": true,
       "targetField": "title"
     },
-    "users_permissions_user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "article"
-    },
     "article_categories": {
       "collection": "article-category"
     },
