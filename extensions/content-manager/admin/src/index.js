@@ -6,7 +6,7 @@ import ExternalLink from './InjectedComponents/ExternalLink';
 import ConfigureViewButton from './InjectedComponents/ContentTypeBuilder/ConfigureViewButton';
 import lifecycles from './lifecycles';
 import reducers from './reducers';
-import rrads from './translations';
+import trads from './translations';
 
 export default (strapi) => {
   const pluginDescription = pluginPkg.strapi.description || pluginPkg.description;
