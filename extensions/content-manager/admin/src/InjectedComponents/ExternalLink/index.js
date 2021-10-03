@@ -50,7 +50,7 @@ const ExternalLink = () => {
 
   return (
     <li>
-      <StyledExternalLink href={`${CLIENTT_URL}/api/preview?secret=${CLIENT_PREVIEW_SECRET}&slug=${modifiedData.slug}&locale=${modifiedData.locale}&apiId=${layout.apiID}&kind=${layout.kind}`}
+      <StyledExternalLink href={`${CLIENT_URL}/api/preview?secret=${CLIENT_PREVIEW_SECRET}&slug=${modifiedData.slug}&locale=${modifiedData.locale}&apiId=${layout.apiID}&kind=${layout.kind}`}
       target="_blank"
       rel="noopener noreferrer" title="page preview">
         <i />
