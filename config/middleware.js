@@ -9,6 +9,7 @@ module.exports = {
         },
 	cache: {
             enabled: true,
+            models: ['articles', 'galleries', 'models']
         }
     }
 }

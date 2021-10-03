@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_settings",
+  "info": {
+    "name": "User Settings"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "Avatar": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "Birthdate": {
+      "type": "date"
+    }
+  }
+}
