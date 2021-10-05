@@ -38,6 +38,8 @@ const StyledExternalLink = styled.a`
 const ExternalLink = () => {
   const { modifiedData, layout } = useContentManagerEditViewDataManager();
   const bannedApiID = ['category'];
+  const clientURL = process.env.CLIENT_URL;
+  const clientPreviewSecret = process.env.CLIENT_PREVIEW_SECRET;
 
   if (bannedApiID.includes(layout.apiID)) {
     return null;
@@ -51,14 +53,14 @@ const ExternalLink = () => {
     return null;
   }
 
-  if (!CLIENT_URL || !CLIENT_PREVIEW_SECRET) {
+  if (!clientURL || !clientPreviewSecret) {
     return null;
   }
 
   return (
     <li>
       <StyledExternalLink
-        href={`${CLIENT_URL}/api/preview?secret=${CLIENT_PREVIEW_SECRET}&slug=${modifiedData.slug}&locale=${modifiedData.locale}&apiID=${layout.apiID}&kind=${layout.kind}`}
+        href={`${clientURL}/api/preview?secret=${clientPreviewSecret}&slug=${modifiedData.slug}&locale=${modifiedData.locale}&apiID=${layout.apiID}&kind=${layout.kind}`}
         target="_blank"
         rel="noopener noreferrer"
         title="page preview"
