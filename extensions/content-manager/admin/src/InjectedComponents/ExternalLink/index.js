@@ -11,7 +11,7 @@ const StyledExternalLink = styled.a`
   span,
   i,
   svg {
-    color #333740;
+    color: #333740;
     width: 13px;
     height: 12px;
     margin-right: 10px;
@@ -27,17 +27,24 @@ const StyledExternalLink = styled.a`
   }
   &:hover {
     text-decoration: none;
-    span, i, svg {
-      color: #007EFF;
+    span,
+    i,
+    svg {
+      color: #007eff;
     }
   }
 `;
 
 const ExternalLink = () => {
   const { modifiedData, layout } = useContentManagerEditViewDataManager();
+  const bannedApiID = ['category'];
+
+  if (bannedApiID.includes(layout.apiID)) {
+    return null;
+  }
 
   if (modifiedData.published_at) {
-    return null
+    return null;
   }
 
   if (!modifiedData.slug) {
@@ -50,14 +57,17 @@ const ExternalLink = () => {
 
   return (
     <li>
-      <StyledExternalLink href={`${CLIENT_URL}/api/preview?secret=${CLIENT_PREVIEW_SECRET}&slug=${modifiedData.slug}&locale=${modifiedData.locale}&apiId=${layout.apiID}&kind=${layout.kind}`}
-      target="_blank"
-      rel="noopener noreferrer" title="page preview">
+      <StyledExternalLink
+        href={`${CLIENT_URL}/api/preview?secret=${CLIENT_PREVIEW_SECRET}&slug=${modifiedData.slug}&locale=${modifiedData.locale}&apiID=${layout.apiID}&kind=${layout.kind}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="page preview"
+      >
         <i />
-        preview
+        Preview
       </StyledExternalLink>
     </li>
-  )
-}
+  );
+};
 
 export default ExternalLink;
