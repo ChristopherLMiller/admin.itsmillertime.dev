@@ -24,9 +24,6 @@
       "required": true,
       "targetField": "title"
     },
-    "article_categories": {
-      "collection": "article-category"
-    },
     "article_tags": {
       "collection": "article-tags"
     },

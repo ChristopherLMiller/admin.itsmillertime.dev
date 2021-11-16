@@ -41,6 +41,8 @@ const ExternalLink = () => {
   const clientURL = process.env.CLIENT_URL;
   const clientPreviewSecret = process.env.CLIENT_PREVIEW_SECRET;
 
+  console.log(clientURL, clientPreviewSecret);
+
   if (bannedApiID.includes(layout.apiID)) {
     return null;
   }

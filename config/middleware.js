@@ -9,7 +9,7 @@ module.exports = {
         },
 	cache: {
             enabled: true,
-            models: ['articles', 'galleries', 'models']
+            models: ['articles', 'article-tags', 'galleries', 'gallery-categories', 'gallery-images', 'gallery-tags', 'manufacturers', 'models', 'model-tags', 'pages', 'scales']
         }
     }
 }

@@ -1,14 +1,14 @@
 {
   "kind": "collectionType",
-  "collectionName": "article_categories",
+  "collectionName": "pages",
   "info": {
-    "name": "Article Category",
+    "name": "Pages",
     "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "attributes": {
     "title": {
@@ -17,8 +17,15 @@
     },
     "slug": {
       "type": "uid",
-      "required": true,
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
     }
   }
 }
